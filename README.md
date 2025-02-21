@@ -1,2 +1,3 @@
-# Lab1
-Let him Cook
+# Lab
+
+#Lab 1 - Let Him Cook
