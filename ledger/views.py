@@ -9,7 +9,7 @@ def recipe_list(request):
         {"name": "Recipe 2", "link": "/recipe/2"}
     ]
 
-    return render(request, 'recipe_list.html', {"recipes": recipes})
+    return render(request, 'recipe_list.html', recipes)
 
 
 def recipe1(request):
@@ -38,7 +38,7 @@ def recipe1(request):
         }
        ],
     }
-    return render(request, 'recipe_detail.html', {"recipe1": recipe1})
+    return render(request, 'recipe_detail.html', recipe1)
 
 
 def recipe2(request):
@@ -75,4 +75,4 @@ def recipe2(request):
         }
         ],
     }
-    return render(request, 'recipe_detail.html', {"recipe2": recipe2})
+    return render(request, 'recipe_detail.html', recipe2)
