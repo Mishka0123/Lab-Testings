@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
     <title>{{ recipe.name }}</title>
 </head>
@@ -9,7 +8,7 @@
     <h2>Ingredients:</h2>
     <ul>
         {% for ingredient in recipe.ingredients %}
-            <li>{{ ingredient.name }}: {{ ingredient.quality }}</li>
+            <li>{{ ingredients.name }}: {{ ingredients.quality }}</li>
         {% endfor %}
     </ul>
     <a href="/recipes/list/">Back to Recipes</a>
