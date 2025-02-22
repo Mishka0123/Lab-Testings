@@ -8,7 +8,7 @@
     <h2>Ingredients:</h2>
     <ul>
         {% for ingredient in recipe.ingredients %}
-            <li>{{ ingredients.name }}: {{ ingredients.quality }}</li>
+            <li>{{ ingredient.name }}: {{ ingredient.quantity }}</li>
         {% endfor %}
     </ul>
     <a href="/recipes/list/">Back to Recipes</a>
