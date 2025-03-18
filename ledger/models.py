@@ -1,16 +1,19 @@
 from django.db import models
+
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.utils.timezone import now
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
 
+User = get_user_model()
 
 class Recipe(models.Model):
     name = models.CharField(max_length=255)
-    
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes")
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes", null=True)
+    created_on = models.DateTimeField(default=now)
+    updated_on = models.DateTimeField(default=now)
 
 
 class RecipeIngredient(models.Model):
