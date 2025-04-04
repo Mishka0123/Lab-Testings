@@ -1,8 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Recipe, Ingredient, RecipeIngredient
 
 from django.contrib.auth.decorators import login_required
 
+from .forms import RecipeForm, RecipeImageForm
 
 @login_required
 def recipe_list(request):
@@ -46,3 +47,34 @@ def populate_database(request):
 
     recipes = Recipe.objects.all()
     return render(request, 'recipe_list.html', {'recipes': recipes})
+
+
+@login_required
+def add_recipe(request):
+    if(request.method == 'POST'):
+        form = RecipeForm(request.POST)
+
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.save()
+            return redirect('recipe_detail', recipe_id=recipe.id)
+    
+    return render(request, 'add_recipe.html', {'form': form})
+
+
+@login_required
+def add_recipe_image(request, pk):
+    recipe = get_object_or_404(Recipe, id=pk)
+    
+    if(request.method == 'POST'):
+        form = RecipeImageForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.recipe = recipe
+            image.save()
+            return redirect('recipe_detail', recipe_id=recipe.id)
+
+    return render(request, 'add_recipe_image.html', {'form': form, 'recipe': recipe})
+
